@@ -32,10 +32,10 @@
             Add item: <input type="text" name="item">
             <input type="submit" name="action" value="add">
 
-        </form>
+        
         <br>
 
-        <form action="shoppinglist" method="post">
+       
             <%--${list} is the setAttribute of the itemlist == session attribute of arraylist--%>
                 <c:forEach var="item" items="${list}"  varStatus="display">
                     
