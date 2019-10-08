@@ -25,14 +25,13 @@
         </form>
         
         <br>
-        <h2>List</h2>
+        <h3>List</h3>
         <br>
         <form action="shoppinglist" method="post">
             
             Add item: <input type="text" name="item">
             <input type="submit" name="action" value="add">
 
-        
         <br>
 
        

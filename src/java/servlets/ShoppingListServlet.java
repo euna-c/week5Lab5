@@ -65,7 +65,7 @@ public class ShoppingListServlet extends HttpServlet {
         {
             session.setAttribute("username", request.getParameter("username"));
             session.setAttribute("username", username);
-          
+         
         }
         else if(actionbtn.equals("logout"))
         {
