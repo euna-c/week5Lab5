@@ -13,8 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Shopping List Page</title>
     </head>
-
-            
+ 
     <body>
         <h1>Shopping List</h1>
 
@@ -27,24 +26,25 @@
         <br>
         <h3>List</h3>
         <br>
-        <form action="shoppinglist" method="post">
+        <form action="" method="post">
             
             Add item: <input type="text" name="item">
             <input type="submit" name="action" value="add">
 
         <br>
-
-       
+        </form>
+         <form action="" method="post">
             <%--${list} is the setAttribute of the itemlist == session attribute of arraylist--%>
                 <c:forEach var="item" items="${list}"  varStatus="display">
                     
                 <input type="radio" name="items" value="${display.count}"> 
                 <%-- c:forEch variable named "item" will be printed out--%>
                 ${item}<br>
-                  
-                </c:forEach>
-           
+            </c:forEach>
+                
+            <c:if test="${list!=null}">    
             <input type="submit" name="action" value="delete">
+            </c:if>  
         </form>
     </body>
 

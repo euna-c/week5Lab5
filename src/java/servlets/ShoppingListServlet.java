@@ -36,10 +36,7 @@ public class ShoppingListServlet extends HttpServlet {
         if (username == null) {
            
             username = request.getParameter("username");
-            
-        } else {
-            username = username;
-        }
+        } 
         
         ArrayList<String> itemlist = (ArrayList<String>) session.getAttribute("list");
         
@@ -47,40 +44,36 @@ public class ShoppingListServlet extends HttpServlet {
         {
             itemlist = new ArrayList();
         } 
-        else 
-        {
-            itemlist = itemlist;
-        }
 
         String actionbtn = request.getParameter("action");
         if (actionbtn == null) {
             actionbtn = "";
         } 
-        else {
-            actionbtn = actionbtn;
-        }
-        
+
         //button actions
         if(actionbtn.equals("register"))
         {
             session.setAttribute("username", request.getParameter("username"));
             session.setAttribute("username", username);
-         
+            
         }
         else if(actionbtn.equals("logout"))
         {
             //remove session
                 session.removeAttribute("username");
-                itemlist = new ArrayList();
-                username = null;
+                session.invalidate();
                 //get the message when the user logged out
                 String msg = "You successfully logged out";
                 request.setAttribute("message", msg);
-               
-        }
+                getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+                return; 
+       }
         else if(actionbtn.equals("add"))
         {
             itemlist.add(request.getParameter("item"));
+            session.setAttribute("list", itemlist);
+            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+            return;             
         }
         else if(actionbtn.equals("delete"))
         {
@@ -91,13 +84,15 @@ public class ShoppingListServlet extends HttpServlet {
                 String item = request.getParameter("items");
                 int countItem = Integer.parseInt(item);
                 itemlist.remove(countItem - 1);
+                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+                return; 
+                
            } 
            catch (NumberFormatException e) 
            {}
 
         }
-        session.setAttribute("username", username);
-        session.setAttribute("list", itemlist);
+
 
         
         if (username == null||username.equals("")) 
@@ -108,8 +103,7 @@ public class ShoppingListServlet extends HttpServlet {
         {
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
         }
-        
-        
+   
         
     }
 
